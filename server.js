@@ -2,6 +2,8 @@ require('dotenv').config();
 const express = require("express");
 const cors = require("cors");
 const connectDB = require("./config/db");
+const authRoutes = require('./routes/auth');
+
 
 
 const app = express();
@@ -16,6 +18,8 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", require("./routes/auth"));
 app.use("/api/tasks", require("./routes/tasks"));
+app.use('/api/auth', authRoutes);
+
 
 app.get("/health", (req, res) => res.json({ status: "OK", uptime: process.uptime() }));
 
